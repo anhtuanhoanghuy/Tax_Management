@@ -1,0 +1,33 @@
+header {
+    background-image: url("/static/img/bg_hd.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  header {
+   height: 100px;
+  }
+
+  th, td {
+    white-space: nowrap;
+}
+
+
+.table-wrapper {
+    overflow-x: scroll;
+
+   
+}
+
+    /* Tùy chỉnh màu nền và màu chữ cho tab */
+    .nav-pills .nav-link.active {
+      background-color: #ffc107 !important; /* Màu nền vàng */
+      color: black !important; /* Màu chữ đen */
+  }
+
+  /* Tùy chỉnh màu chữ cho tab khi không được chọn */
+  .nav-pills .nav-link {
+      color: black !important; /* Màu chữ đen */
+  }
+
+  /* Tùy chỉnh màu nền khi di chuột qua tab */
+
