@@ -15,8 +15,7 @@
             <div  class="container-fluid">
              
                 <a class="navbar-brand" href="#">
-                    <img src="static/img/logo.svg" width="100%" height="100%
-                    " class="d-inline-block align-top" alt="">
+                    <img src="static/img/logo.svg" width="100%" height="100%" class="d-inline-block align-top" alt="">
 
                   </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,17 +28,6 @@
                         </li>
                         <li class="nav-item">
                           <a class="nav-link fs-5" href="#">Hỗ trợ</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link fs-5" href="#">Liên hệ</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link fs-5" href="#">Danh sách TCTN</a>
-                        </li>
-                       
-                       
-                        <li class="nav-item ms-2">
-                          <i class="bi bi-bell" style="font-size: 30px;"></i>
                         </li>
                         <li class="nav-item ms-2">
 
@@ -63,7 +51,7 @@
           </nav>
          
     </header>
-    <div class="container-fluid h-75 row mt-4 ms-1" style="background-image: url(/static/img/viewinvoice-bg.jpg); background-repeat: no-repeat; background-size: cover; background-position: center;" >
+    <div class="container-fluid h-75 row mt-4 ms-1" >
         <aside class="col-2 d-flex flex-column">
 
 
@@ -116,20 +104,17 @@
                     <thead>
                       <tr class="table-warning">
                         <th scope="col" class="first-col">STT</th>
-                        <th scope="col">Kí hiệu số mẫu</th>
                         <th scope="col">Kí hiệu hóa đơn</th>
                         <th scope="col">Số hóa đơn</th>
                         <th scope="col">Ngày lập</th>
-                        <th scope="col">Thông tin hóa đơn</th>
-                        <th scope="col">Tổng tiền chưa thuế</th>
-                        <th scope="col">Tổng tiền thuế</th>
-                        <th scope="col">Tổng tiền chiết khấu thương mại</th>
-                        <th scope="col">Tổng tiền thanh toán</th>
-                        <th scope="col">Đơn vị tiền tệ</th>
-                        <th scope="col">Trạng thái hóa đơn</th>
-                        <th scope="col">Kết quả kiểm tra hóa đơn</th>
-                        <th scope="col">Hóa đơn liên quan</th>
-                        <th scope="col">Thông tin liên quan</th>
+                        <th scope="col">Tính chất</th>
+                        <th scope="col">Tên hàng hóa, dịch vụ</th>
+                        <th scope="col">Đơn vị tính</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Đơn giá</th>
+                        <th scope="col">Chiết khấu</th>
+                        <th scope="col">Thuế suất</th>
+                        <th scope="col">Thành tiền chưa có thuế GTGT</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -177,7 +162,7 @@
       </div>
     <!-- Modal -->
         <div class="modal fade" id="loginMSTModal" tabindex="-1" aria-labelledby="loginMSTModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header border-bottom border-warning border-3">
                 <img src="static/img/title_icon.png" alt="">
@@ -187,16 +172,14 @@
             <div class="modal-body ">
               <form class="grid gap-0 row-gap-3" id="loginMSTForm">
                
-                <div class="mb-3 p-2 g-col-6">
+                <div class="mb-1 p-2 g-col-6">
                   <label for="password" class="form-label">CapCha</label>
-                  <div class="input-group">
+                  <div class="input-group mb-1">
                     <input type="input" class="form-control" id="captchaValue" name="passwordMST">
-                    <div class="btn btn-outline-secondary" type="button" id="captcha">
-                      
-                    </div>
+                    <div class="btn btn-outline-secondary" type="button" id="captcha"></div>
                   </div>
+                  <div class = "text-danger" id = "warning">Mật khẩu Doanh nghiệp đã bị thay đổi, vui lòng cấu hình lại.</div>
                 </div>
-               
                 <button type="button" class="btn btn-warning  d-flex justify-content-center " id="loginCompany" >Đăng nhập</button>
               </form>
             </div>
