@@ -44,6 +44,17 @@ $(document).ready(function () {
     }
   })
 
+  $(document).ready(function() {
+    $('#confirmSendEmailModal').on('shown.bs.modal', function () {
+      $('#sendEmailButton').focus();
+    });
+  });
+
+  $(document).ready(function() {
+    $('#exampleModal').on('shown.bs.modal', function () {
+      $('#otp-input1').focus();
+    });
+  });
   $("#logBttn").click(function (event) { //xử lý đăng nhập
       $(".otp-Form").prop("display","flex");
     // if ($("#username").val() == "" && $("#password").val() == "") {
@@ -69,3 +80,40 @@ $(document).ready(function () {
     // }
   })
 })
+
+
+
+// Validate OTP
+$(document).ready(function() {
+  const $otpInputs = $('.otp-input');
+  const $verifyButton = $('#verifyOtpButton');
+
+  $otpInputs.on('input', function() {
+    if (this.value.length === parseInt($(this).attr('maxlength'))) {
+      const index = $otpInputs.index(this);
+      if (index < $otpInputs.length - 1) {
+        $otpInputs.eq(index + 1).focus();
+      } else {
+        checkAllOtpFilled();
+      }
+    }
+  });
+
+  $otpInputs.on('keyup', function(event) {
+    if (event.key === 'Backspace' && this.value.length === 0) {
+      const index = $otpInputs.index(this);
+      if (index > 0) {
+        $otpInputs.eq(index - 1).focus();
+      }
+    }
+  });
+
+  function checkAllOtpFilled() {
+    const allFilled = $otpInputs.toArray().every(input => input.value.length === parseInt($(input).attr('maxlength')));
+    $verifyButton.prop('disabled', !allFilled);
+  }
+
+  // Gọi hàm kiểm tra ban đầu
+  checkAllOtpFilled();
+});
+//
