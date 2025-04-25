@@ -82,16 +82,27 @@
         <main class="col-10">
           <div class="row">
             <div class=" d-flex col-2 mb-3">
-             <p class="align-item-end justify-content-end mb-0 pt-2" >Từ</p>
+              <span class="align-item-end pt-2 mb-0" style=" vertical-align: text-bottom;">Từ:</span>
+
               <input type="date" class="form-control ms-3" id="startDate" name="startDate" placeholder="Ngày bắt đầu" aria-label="Starttime" aria-describedby="basic-addon1">
             </div>
 
             <div class=" col-2 mb-3 d-flex">
-              <span class="align-item-end pt-2 mb-0" style=" vertical-align: text-bottom;">Đến</span>
+              <span class="align-item-end pt-2 mb-0" style=" vertical-align: text-bottom;">Đến:</span>
               <input type="date" class="form-control ms-3" id="endDate" name="endDate" placeholder="Ngày kết thúc" aria-label="Starttime" aria-describedby="basic-addon1">
             </div>
+            <div class=" d-flex col-6 mb-3 dropdown"> 
+              <span class="align-item-end pt-2 mb-0 col-2" style=" vertical-align: text-bottom;">Kết quả kiểm tra:</span>
+              <select title="select" class="form-select" id="statusSelect" name="status">
+                <option value="">Tất cả</option>
+                <option value="active">Cục thuế đã nhận háo đơn có mã khởi tạo từ máy tính tiền</option>
+                <option value="expired">Hết hạn</option>
+                <option value="checked">Đã đăng kiểm</option>
+              </select>
+              
+            </div>
+
             <div class=" col-2 mb-3 d-flex">
-             
               <button class=" btn btn-warning" >Tìm kiếm</button>
             </div>
           </div>
