@@ -64,7 +64,7 @@
                     </option></li>
                     <li class="list-group-item"> <option value="2">Công ty B</option></li>
                   </select>
-                  <button type="button" class="btn btn-warning w-100 ms-3 col">Đồng bộ</button>
+                  <button type="button" class="btn btn-warning w-100 ms-3 col" data-bs-toggle="modal" data-bs-target="#errorModal">Đồng bộ</button>
                 </div>
               
                 <div class="row h-25">
@@ -197,6 +197,31 @@
           </div>
         </div>
       </div>
+      <!-- From Uiverse.io by 3bdel3ziz-T --> 
+       <!-- Modal Error -->
+
+       <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="loginMSTModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header border-bottom border-warning border-3">
+                <img src="static/img/title_icon.png" alt="">
+              <h5 class="modal-title ms-3" id="loginMSTModalLabel"></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body ">
+              <form class="grid gap-0 row-gap-3" >
+               
+                <div class="mb-1 p-2 g-col-6">
+   
+                  <div class = "text-danger" id = "warning">Mật khẩu Doanh nghiệp đã bị thay đổi, vui lòng cấu hình lại.</div>
+                </div>
+                <button type="button" class="btn btn-warning  d-flex justify-content-center "  >Đến trang cài đặt</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
 </body>
 <script type="text/javascript" src="./static/js/jquery-3.2.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
