@@ -76,7 +76,7 @@
   </div>
   <!-- Modal Forgot Password -->
   <div class="modal fade" id="confirmSendEmailModal" tabindex="-1" aria-labelledby="confirmSendEmailModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm ">
+    <div class="modal-dialog  ">
       <div class="modal-content">
         <div class="modal-header bg-warning ">
           <h5 class="modal-title" id="confirmSendEmailModalLabel">Xác Nhận Cấp Lại Mật Khẩu</h5>

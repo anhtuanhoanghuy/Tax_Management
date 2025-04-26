@@ -2,7 +2,7 @@
     <aside class="col-2 d-flex flex-column">
 
 
-      <div class="row  mb-5  border-bottom pt-5">
+      <div class="row  mb-5  border-bottom pt-1">
 
         <select class="form-select form-select-sm col" id="selectCompany" aria-label=".form-select-sm example">
           <li class="list-group-item">
@@ -21,13 +21,13 @@
           data-bs-target="#errorModal">Đồng bộ</button>
       </div>
 
-      <div class="row h-25">
+      <div class="row pt-5 h-25">
 
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <a class="nav-link active border-bottom" data-bs-toggle="pill" role="tab">Tra cứu hóa đơn điện tử bán ra</a>
-          <a class="nav-link border-bottom" data-bs-toggle="pill" role="tab" aria-selected="false">Tra cứu hóa đơn điện
-            tử mua vào</a>
-          <a class="nav-link border-bottom" data-bs-toggle="pill" role="tab" aria-selected="false">Thống kê</a>
+          <button class="nav-link active border-bottom" data-bs-toggle="pill" role="tab">Tra cứu hóa đơn điện tử bán ra</button>
+          <button class="nav-link border-bottom" data-bs-toggle="pill" role="tab" aria-selected="false">Tra cứu hóa đơn điện
+            tử mua vào</button>
+          <button class="nav-link border-bottom" data-bs-toggle="pill" role="tab" aria-selected="false">Thống kê</button>
 
         </div>
       </div>
@@ -35,7 +35,7 @@
     </aside>
 
     <main class="col-10">
-      <div class="row">
+      <div class="row pt-1">
         <div class=" d-flex col-2 mb-3">
           <span class="align-item-end pt-2 mb-0" style=" vertical-align: text-bottom;">Từ:</span>
 
@@ -69,7 +69,8 @@
         <div class=" col-2 mb-3 d-flex">
           <button class=" btn btn-warning">Tìm kiếm</button>
         </div>
-        <div class=" col-12 mb-3 mt-3 d-flex flex-row-reverse ">
+        <div class=" col-12 mb-3 mt-3 d-flex  ">
+          <p class="me-auto mb-0">Có ... kết quả</p>
           <nav class="mx-4" aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item">
