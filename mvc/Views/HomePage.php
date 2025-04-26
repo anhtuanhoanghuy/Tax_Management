@@ -1,63 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="static/css/index.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=file_export" />
-</head>
-
-<body class="h-100">
-  <header class="border-bottom  border-3 border-warning">
-    <nav class="navbar navbar-expand-lg ">
-      <div class="container-fluid">
-
-        <a class="navbar-brand" href="#">
-          <img src="static/img/logo.svg" width="100%" height="100%" class="d-inline-block align-top" alt="">
-
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end  " id="navbarNav" data-bs-theme="warning">
-          <ul class="navbar-nav nav   ">
-            <li class="nav-item">
-              <a class="nav-link active fs-5" aria-current="page" href="#">Trang chủ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link fs-5" href="#">Hỗ trợ</a>
-            </li>
-            <li class="nav-item ms-2">
-
-              <div class="dropdown">
-
-                <i class="bi bi-person" style="font-size: 30px;" type="button" data-bs-toggle="dropdown"
-                  aria-expanded="false"></i>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-                  <li><a class="dropdown-item" href="http://127.0.0.1:5500/setting.html">Cài đặt</a></li>
-                  <li><a class="dropdown-item active" href="#">Đăng xuất</a></li>
-
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item">
-
-            </li>
-          </ul>
-        </div>
-
-      </div>
-    </nav>
-
-  </header>
   <div class="container-fluid h-75 row mt-4 ms-1">
     <aside class="col-2 d-flex flex-column">
 
@@ -112,9 +52,6 @@
           <span class="align-item-end pt-2 mb-0 col-2" style=" vertical-align: text-bottom;">Kết quả kiểm tra:</span>
           <select title="select" class="form-select" id="statusSelect" name="status">
             <option value="">Tất cả</option>
-            <option value="active">Cục thuế đã nhận háo đơn có mã khởi tạo từ máy tính tiền</option>
-            <option value="expired">Hết hạn</option>
-            <option value="checked">Đã đăng kiểm</option>
             <option value="expired">Cục thuế đã nhận</option>
             <option value="expired">Đang tiến hành kiểm tra cấp mã</option>
             <option value="expired">CQT từ chối hóa đơn theo từng lần phát sinh</option>
@@ -133,7 +70,6 @@
           <button class=" btn btn-warning">Tìm kiếm</button>
         </div>
         <div class=" col-12 mb-3 mt-3 d-flex flex-row-reverse ">
-
           <nav class="mx-4" aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item">
@@ -141,7 +77,7 @@
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
-              <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
+              <li class="page-item"><a class="page-link text-dark" href="#">1/15</a></li>
 
               <li class="page-item">
                 <a class="page-link text-dark" href="#" aria-label="Next">
@@ -158,9 +94,12 @@
               </select>
 
               <li class="page-item w-100">
-                <button class="button border-secondary border-1 h-100 ms-3" id="export" title="Xuất hóa đơn">
-                  <span class="material-symbols-outlined"> file_export </span>
-                </button>
+                <div class="tooltip-container">
+                  <button class="button border-secondary border-1 h-100 ms-3" id="export">
+                    <span class="material-symbols-outlined"> file_export </span>
+                  </button>
+                  <div class="tooltip-text">Xuất hóa đơn</div>
+                </div>
               </li>
             </ul>
           </nav>
@@ -279,25 +218,16 @@
 
               <div class="text-danger" id="warning">Mật khẩu Doanh nghiệp đã bị thay đổi, vui lòng cấu hình lại.</div>
             </div>
-            <button type="button" class="btn btn-warning  d-flex justify-content-center ">Đến trang cài đặt</button>
+            <button type="button" class="btn btn-warning  d-flex justify-content-center ">
+              <a href="/Tax_Management/Settings">Đến trang cài đặt</a>
+            </button>
           </form>
         </div>
       </div>
     </div>
   </div>
-  <script type="text/javascript" src="./static/js/jquery-3.2.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
-  <script src="static/js/index.js"></script>
-</body>
+    <script src="./public/js/LoginCompany.js"></script>
 
-</html>
-
-<!-- // caif dat tai khoan 
-- doi mat khau
-- doi so dien thoai
-- doi email
--Cai dat doanh nghiep
- crud cong ty: add mst,mk, ten cong ty,
- nut save o goc  -->

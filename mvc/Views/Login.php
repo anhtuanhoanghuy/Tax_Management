@@ -7,9 +7,8 @@
   <title>Trang Đăng Nhập</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="static/css/login.css">
-  <link rel="stylesheet" href="static/css/modal_otp.css">
-  <script type="text/javascript" src="../static/js/jquery-3.2.1.min.js"></script>
+  <link rel="stylesheet" href="./public/css/Login.css">
+  <script type="text/javascript" src="./public/js/jquery-3.2.1.min.js"></script>
 </head>
 
 <body>
@@ -19,25 +18,26 @@
       <h3 class="text-center">Đăng Nhập</h3>
     </div>
     <div class="card-body">
-      <form id="login">
+      <form id="login" action = "./mvc/Controllers/Login.php" method = "POST">
         <div class="mb-3">
           <label for="username" class="form-label">Tên người dùng</label>
-          <input type="text" class="form-control" id="username" placeholder="Nhập tên người dùng">
+          <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên người dùng">
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Mật khẩu</label>
-          <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu">
         </div>
         <div class="mb-3">
           <label for="email" class="form-label">Email/SĐT</label>
-          <input type="text" class="form-control" id="email" placeholder="Nhập Email/SĐT">
+          <input type="text" class="form-control" id="email" name="email" placeholder="Nhập Email/SĐT">
         </div>
         <div class="mb-3">
           <div class="logContainer__space text-danger"></div>
         </div>
         <div class="d-grid">
-          <button type="button" class="btn btn-warning" id="logBttn" data-bs-toggle="modal"
-            data-bs-target="#exampleModal">Đăng Nhập</button>
+        <button type = "submit" class="btn btn-warning" id="logBttn" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">Đăng Nhập</button>
+          <!-- <button type = "submit" class="btn btn-warning" id="logBttn">Đăng Nhập</button> -->
         </div>
         <div class="mb-3 mt-3">
           <a href="#" id="btnForgotPass" data-bs-toggle="modal" data-bs-target="#confirmSendEmailModal">Quên mật khẩu</a>
@@ -79,11 +79,11 @@
     <div class="modal-dialog modal-sm ">
       <div class="modal-content">
         <div class="modal-header bg-warning ">
-          <h5 class="modal-title" id="confirmSendEmailModalLabel">Xác Nhận Gửi Email</h5>
+          <h5 class="modal-title" id="confirmSendEmailModalLabel">Xác Nhận Cấp Lại Mật Khẩu</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
         </div>
         <div class="modal-body">
-          <p>Mật khẩu mới sẽ được gửi đến Email này. Bạn có chắc chắn muốn gửi này không?</p>
+          <p>Mật khẩu mới sẽ được gửi đến Email/SĐT này. Bạn có chắc chắn muốn gửi này không?</p>
 
           </div>
         <div class="modal-footer">
@@ -95,6 +95,6 @@
   </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../login/static/js/index.js"></script>
+<script src="./public/js/Login.js"></script>
 
 </html>

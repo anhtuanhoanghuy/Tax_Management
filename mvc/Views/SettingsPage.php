@@ -1,62 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="static/css/index.css">
-</head>
-
-<body class="h-100">
-    <header class="border-bottom  border-3 border-warning">
-        <nav class="navbar navbar-expand-lg ">
-            <div class="container-fluid">
-
-                <a class="navbar-brand" href="#">
-                    <img src="static/img/logo.svg" width="100%" height="100%
-                    " class="d-inline-block align-top" alt="">
-
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end  " id="navbarNav" data-bs-theme="warning">
-                    <ul class="navbar-nav nav   ">
-                        <li class="nav-item">
-                            <a class="nav-link active fs-5" aria-current="page" href="#">Trang chủ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fs-5" href="#">Hỗ trợ</a>
-                        </li>
-
-
-                        <li class="nav-item ms-2">
-
-                            <div class="dropdown">
-
-                                <i class="bi bi-person" style="font-size: 30px;" type="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false"></i>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-                                    <li><a class="dropdown-item" href="#">Cài đặt</a></li>
-                                    <li><a class="dropdown-item active" href="#">Đăng xuất</a></li>
-
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-        </nav>
-
-    </header>
     <div class="container-fluid vh-100 row align-items-start justify-content-center mt-4 ms-1">
         <div class="container mt-3 p-4 bg-white shadow rounded ">
             <div class="mb-4">
@@ -258,26 +199,9 @@
     </div>
     <!-- Button trigger modal -->
 
-
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.min.js"
         integrity="sha384-VQqxDN0EQCkWoxt/0vsQvZswzTHUVOImccYmSyhJTp7kGtPed0Qcx8rK9h9YEgx+"
         crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="static/js/index.js"></script>
-</body>
-
-</html>
-
-<!-- // caif dat tai khoan 
-- doi mat khau
-- doi so dien thoai
-- doi email
--Cai dat doanh nghiep
- crud cong ty: add mst,mk, ten cong ty,
- nut save o goc  -->
