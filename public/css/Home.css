@@ -216,3 +216,6 @@ a {
   border-style: solid;
   border-color: black transparent transparent transparent;
 }
+.big-col{
+  width: 400px;
+}

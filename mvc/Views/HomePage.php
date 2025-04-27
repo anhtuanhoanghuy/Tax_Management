@@ -48,7 +48,7 @@
           <input type="date" class="form-control ms-3" id="endDate" name="endDate" placeholder="Ngày kết thúc"
             aria-label="Starttime" aria-describedby="basic-addon1">
         </div>
-        <div class=" d-flex col-6 mb-3 dropdown">
+        <div class=" d-flex col-7 mb-3 dropdown">
           <span class="align-item-end pt-2 mb-0 col-2" style=" vertical-align: text-bottom;">Kết quả kiểm tra:</span>
           <select title="select" class="form-select" id="statusSelect" name="status">
             <option value="">Tất cả</option>
@@ -66,7 +66,7 @@
 
         </div>
 
-        <div class=" col-2 mb-3 d-flex">
+        <div class=" col-1 mb-3 d-flex">
           <button class=" btn btn-warning">Tìm kiếm</button>
         </div>
         <div class=" col-12 mb-3 mt-3 d-flex  ">
@@ -116,11 +116,11 @@
           <thead>
             <tr class="table-warning">
               <th scope="col" class="first-col">STT</th>
-              <th scope="col">Kí hiệu hóa đơn</th>
+              <th scope="col" class="big_col">Kí hiệu hóa đơn</th>
               <th scope="col">Số hóa đơn</th>
-              <th scope="col">Ngày lập</th>
-              <th scope="col">Tính chất</th>
-              <th scope="col">Tên hàng hóa, dịch vụ</th>
+              <th scope="col" class="big-col">Ngày lập</th>
+              <th scope="col" class="big-col">Tính chất</th>
+              <th scope="col" class="big-col">Tên hàng hóa, dịch vụ</th>
               <th scope="col">Đơn vị tính</th>
               <th scope="col">Số lượng</th>
               <th scope="col">Đơn giá</th>
