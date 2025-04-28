@@ -37,20 +37,20 @@
     <main class="col-10">
       <div class="row pt-1">
         <div class=" d-flex col-2 mb-3">
-          <span class="align-item-end pt-2 mb-0" style=" vertical-align: text-bottom;">Từ:</span>
+          <span class="align-item-end pt-2 mb-0 me-2" style=" vertical-align: text-bottom;">Từ:</span>
 
-          <input type="date" class="form-control ms-3" id="startDate" name="startDate" placeholder="Ngày bắt đầu"
+          <input type="date" class="form-control w-75" id="startDate" name="startDate" placeholder="Ngày bắt đầu"
             aria-label="Starttime" aria-describedby="basic-addon1">
         </div>
 
         <div class=" col-2 mb-3 d-flex">
-          <span class="align-item-end pt-2 mb-0" style=" vertical-align: text-bottom;">Đến:</span>
-          <input type="date" class="form-control ms-3" id="endDate" name="endDate" placeholder="Ngày kết thúc"
+          <span class="align-item-end pt-2 mb-0 mx-2" style=" vertical-align: text-bottom;">Đến:</span>
+          <input type="date" class="form-control w-75 " id="endDate" name="endDate" placeholder="Ngày kết thúc"
             aria-label="Starttime" aria-describedby="basic-addon1">
         </div>
-        <div class=" d-flex col-6 mb-3 dropdown">
-          <span class="align-item-end pt-2 mb-0 col-2" style=" vertical-align: text-bottom;">Kết quả kiểm tra:</span>
-          <select title="select" class="form-select" id="statusSelect" name="status">
+        <div class=" d-flex col-7 mb-3  dropdown">
+          <span class="align-item-end pt-2 mb-0 mx-2  " style=" vertical-align: text-bottom;">Kết quả kiểm tra:</span>
+          <select title="select" class="form-select w-75  " id="statusSelect" name="status">
             <option value="expired">Cục thuế đã nhận</option>
             <option value="expired">Đang tiến hành kiểm tra cấp mã</option>
             <option value="expired">CQT từ chối hóa đơn theo từng lần phát sinh</option>
@@ -65,7 +65,7 @@
 
         </div>
 
-        <div class=" col-2 mb-3 d-flex">
+        <div class=" col-1 mb-3 d-flex">
           <button class=" btn btn-warning">Tìm kiếm</button>
         </div>
         <div class=" col-12 mb-3 mt-3 d-flex  ">
@@ -115,11 +115,11 @@
           <thead>
             <tr class="table-warning">
               <th scope="col" class="first-col">STT</th>
-              <th scope="col">Kí hiệu hóa đơn</th>
+              <th scope="col" class="big_col">Kí hiệu hóa đơn</th>
               <th scope="col">Số hóa đơn</th>
-              <th scope="col">Ngày lập</th>
-              <th scope="col">Tính chất</th>
-              <th scope="col">Tên hàng hóa, dịch vụ</th>
+              <th scope="col" class="big-col">Ngày lập</th>
+              <th scope="col" class="big-col">Tính chất</th>
+              <th scope="col" class="big-col">Tên hàng hóa, dịch vụ</th>
               <th scope="col">Đơn vị tính</th>
               <th scope="col">Số lượng</th>
               <th scope="col">Đơn giá</th>
