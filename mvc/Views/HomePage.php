@@ -51,7 +51,6 @@
         <div class=" d-flex col-6 mb-3 dropdown">
           <span class="align-item-end pt-2 mb-0 col-2" style=" vertical-align: text-bottom;">Kết quả kiểm tra:</span>
           <select title="select" class="form-select" id="statusSelect" name="status">
-            <option value="">Tất cả</option>
             <option value="expired">Cục thuế đã nhận</option>
             <option value="expired">Đang tiến hành kiểm tra cấp mã</option>
             <option value="expired">CQT từ chối hóa đơn theo từng lần phát sinh</option>
