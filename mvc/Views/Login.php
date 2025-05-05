@@ -35,9 +35,7 @@
           <div class="logContainer__space text-danger"></div>
         </div>
         <div class="d-grid">
-        <button type = "submit" class="btn btn-warning" id="logBttn" data-bs-toggle="modal"
-        data-bs-target="#exampleModal">Đăng Nhập</button>
-          <!-- <button type = "submit" class="btn btn-warning" id="logBttn">Đăng Nhập</button> -->
+          <button type = "button" class="btn btn-warning" id="logBttn">Đăng Nhập</button>
         </div>
         <div class="mb-3 mt-3">
           <a href="#" id="btnForgotPass" data-bs-toggle="modal" data-bs-target="#confirmSendEmailModal">Quên mật khẩu</a>
@@ -60,15 +58,15 @@
       <form class=" modal-content otp-Form modal-body ">
 
         <span class="mainHeading ">Enter OTP</span>
-        <p class="otpSubheading">We have sent a verification code to your mobile number</p>
+        <p class="otpSubheading">Chúng tôi đã gửi mã xác thực tới thông tin liên hệ của bạn.</p>
         <div class="inputContainer">
           <input required="required" maxlength="1" type="text" class="otp-input" id="otp-input1">
           <input required="required" maxlength="1" type="text" class="otp-input" id="otp-input2">
           <input required="required" maxlength="1" type="text" class="otp-input" id="otp-input3">
           <input required="required" maxlength="1" type="text" class="otp-input" id="otp-input4">
         </div>
-        <button class="verifyButton" type="submit">Verify</button>
-        <p class="resendNote">Didn't receive the code? <button class="resendBtn">Resend Code</button></p>
+        <button id="verifyButton" type="submit">Xác nhận</button>
+        <p class="resendNote">Không nhận được mã? <button class="resendBtn">Gửi lại mã</button></p>
 
       </form>
     </div>
