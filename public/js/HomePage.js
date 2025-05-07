@@ -9,7 +9,6 @@ $(document).ready(function(){
         token: "12345678"
         },function(data){
             data =  JSON.parse(data); //dữ liệu JSON
-            console.log(data);
             if (data.length == 0) {
             $(".menu").append(`<li>
                 <span>Không có công ty</span>
@@ -54,6 +53,8 @@ $(document).ready(function(){
         if ($('#startDate').val() != "" && $('#endDate').val() != "" && $('#startDate').val() > $('#endDate').val()) {
             alert("Không được chọn ngày bắt đầu lớn hơn ngày kết thúc.")
         } else {
+            console.time("queryTime");   // Bắt đầu đo thời gian với nhãn "label"
+            // đoạn mã cần đo thời gian
             $.post("./Home/getTaxInfo", //AJAX không tải lại
                 {MST: "1122334455",
                 tax_type:$('#v-pills-tab .nav-link.active').val(),
@@ -62,9 +63,9 @@ $(document).ready(function(){
                 result:$("#statusSelect").val()
                 },function(data){
                     data = JSON.parse(data);
-                    console.log(data);
                     $("#result_count").html(`Có ${data.length} kết quả`);
                     loadData(data);
+                    console.timeEnd("queryTime"); // Kết thúc và in thời gian thực thi với cùng nhãn
         })
         }
     

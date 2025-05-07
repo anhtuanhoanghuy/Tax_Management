@@ -16,9 +16,9 @@ require_once("../core/Database.php");
         // } 
 
         public function checkAccountWithEmail($a, $b, $c) {
-            $sql = "SELECT * FROM account WHERE user_name = '$a' AND pass_word ='$b' AND email ='$c'";
+            $sql = "SELECT * FROM account WHERE user_name = ? AND pass_word = ? AND email = ?";
             $result = $this ->conn->prepare($sql);
-            $result->execute();
+            $result->execute([$a,$b,$c]);
             if ($result->rowCount() ==  1) {
                 return 1;
             } else {
@@ -29,9 +29,9 @@ require_once("../core/Database.php");
         }
 
         public function checkAccountWithTel($a, $b, $c) {
-            $sql = "SELECT * FROM account WHERE user_name = '$a' AND pass_word ='$b' AND tel ='$c'";
+            $sql = "SELECT * FROM account WHERE user_name = ? AND pass_word = ? AND tel = ?";
             $result = $this ->conn->prepare($sql);
-            $result->execute();
+            $result->execute([$a,$b,$c]);
             if ($result->rowCount() ==  1) {
                 return 1;
             } else {
