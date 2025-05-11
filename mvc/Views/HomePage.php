@@ -1,33 +1,49 @@
-  <div class="container-fluid h-75 row mt-4 ms-1">
-    <aside class="col-2 d-flex flex-column">
 
-
-      <div class="row  mb-5  border-bottom pt-1">
-
-        <select class="form-select form-select-sm col" id="selectCompany" aria-label=".form-select-sm example">
-          <li class="list-group-item">
-            <option value="0">Chọn công ty</option>
-          </li>
-          <li class="list-group-item">
-            <option value="1">
-              <a class="nav-link fs-5 " data-bs-toggle="modal" data-bs-target="#loginModal">Công ty A</a>
-            </option>
-          </li>
-          <li class="list-group-item">
-            <option value="2">Công ty B</option>
-          </li>
-        </select>
-        <button type="button" class="btn btn-warning w-100 ms-3 col" data-bs-toggle="modal"
-          data-bs-target="#errorModal">Đồng bộ</button>
+    <div class="d-flex flex-wrap align-items-center gap-3 ms-3 pt-3 search-bar-wrapper">
+  
+        <div class="dropdown">
+            <div class="select">
+                <span class="selected">--- Hãy chọn công ty ---</span>
+                <div class="caret"></div>
+            </div>
+            <ul class="menu">
+            </ul>
+        </div>
+  
+      <button class="btn btn-warning">Đồng bộ</button>
+  
+      <div class="form-label-group">
+        <label class="mb-0">Từ:</label>
+        <input id ="startDate" type="date" class="form-control" style="width: 160px;">
       </div>
+  
+      <div class="form-label-group">
+        <label class="mb-0">Đến:</label>
+        <input id ="endDate" type="date" class="form-control" style="width: 160px;">
+      </div>
+  
+      <!--Kết quả kiểm tra -->
+      <div class="form-label-group">
+        <label class="mb-0">Kết quả kiểm tra:</label>
+        <select id = "statusSelect" class="form-select long-option-select" disabled>
+          <option value = "ii">Đã cấp mã hóa đơn</option>
+          <option value = "iwc">Cục Thuế đã nhận không mã</option>
+          <option value = "ftcr">Cục Thuế đã nhận hóa đơn có mã khởi tạo từ máy tính tiền</option>
+        </select>
+      </div>
+  
+      <button id ="search_bttn" class="btn btn-warning">Tìm kiếm</button>
+    </div>
 
+  <div class="container-fluid h-75 row ms-1">
+    <aside class="col-2 d-flex flex-column">
       <div class="row pt-5 h-25">
 
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <button class="nav-link active border-bottom" data-bs-toggle="pill" role="tab">Tra cứu hóa đơn điện tử bán ra</button>
-          <button class="nav-link border-bottom" data-bs-toggle="pill" role="tab" aria-selected="false">Tra cứu hóa đơn điện
+          <button id="sold_bttn" class="nav-link active border-bottom" data-bs-toggle="pill" role="tab" value="sold">Tra cứu hóa đơn điện tử bán ra</button>
+          <button id="purchase_bttn" class="nav-link border-bottom" data-bs-toggle="pill" role="tab" aria-selected="false" value="purchase">Tra cứu hóa đơn điện
             tử mua vào</button>
-          <button class="nav-link border-bottom" data-bs-toggle="pill" role="tab" aria-selected="false">Thống kê</button>
+          <button class="nav-link border-bottom" data-bs-toggle="pill" role="tab" aria-selected="false" value="Statistics">Thống kê</button>
 
         </div>
       </div>
@@ -36,105 +52,53 @@
 
     <main class="col-10">
       <div class="row pt-1">
-        <div class=" d-flex col-2 mb-3">
-          <span class="align-item-end pt-2 mb-0" style=" vertical-align: text-bottom;">Từ:</span>
-
-          <input type="date" class="form-control ms-3" id="startDate" name="startDate" placeholder="Ngày bắt đầu"
-            aria-label="Starttime" aria-describedby="basic-addon1">
-        </div>
-
-        <div class=" col-2 mb-3 d-flex">
-          <span class="align-item-end pt-2 mb-0" style=" vertical-align: text-bottom;">Đến:</span>
-          <input type="date" class="form-control ms-3" id="endDate" name="endDate" placeholder="Ngày kết thúc"
-            aria-label="Starttime" aria-describedby="basic-addon1">
-        </div>
-        <div class=" d-flex col-7 mb-3 dropdown">
-          <span class="align-item-end pt-2 mb-0 col-2" style=" vertical-align: text-bottom;">Kết quả kiểm tra:</span>
-          <select title="select" class="form-select" id="statusSelect" name="status">
-            <option value="">Tất cả</option>
-            <option value="expired">Cục thuế đã nhận</option>
-            <option value="expired">Đang tiến hành kiểm tra cấp mã</option>
-            <option value="expired">CQT từ chối hóa đơn theo từng lần phát sinh</option>
-            <option value="expired">Hóa đơn đủ điều kiện cấp mã</option>
-            <option value="expired">Hóa đơn không đủ điều kiện cấp mã</option>
-            <option value="expired">Đã cấp mã hóa đơn</option>
-            <option value="expired">Cục thuế đã nhận không mã</option>
-            <option value="expired">Đã kiểm tra định kì HDDT không có mã</option>
-            <option value="expired">Cục thuế đã nhận hóa đơn khởi tạo từ máy tính tiền</option>
-
-          </select>
-
-        </div>
-
-        <div class=" col-1 mb-3 d-flex">
-          <button class=" btn btn-warning">Tìm kiếm</button>
-        </div>
         <div class=" col-12 mb-3 mt-3 d-flex  ">
-          <p class="me-auto mb-0">Có ... kết quả</p>
-          <nav class="mx-4" aria-label="Page navigation example">
-            <ul class="pagination">
-              <li class="page-item">
-                <a class="page-link text-dark" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link text-dark" href="#">1/15</a></li>
-
-              <li class="page-item">
-                <a class="page-link text-dark" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-              <select title="select"  class="form-select ms-3 " id="statusSelect" name="status">
-
-                <option value="active ">15</option>
-                <option value="checked">30</option>
-                <option value="expired">50</option>
-              
-    
+          <p id = "result_count" class="me-auto mb-0"></p>
+          <nav class="pagination mx-4 d-flex align-items-center" aria-label="Page navigation example">
+            <ul class="pagination-list mb-0"></ul>
+              <select title="select" class="form-select ms-3" id="itemSelect" name="status">
+                  <option value="10">10</option>
+                  <option value="30">30</option>
+                  <option value="50">50</option>
               </select>
-
-              <li class="page-item w-100">
-                <div class="tooltip-container">
+              <div class="tooltip-container">
                   <button class="button border-secondary border-1 h-100 ms-3" id="export">
                     <span class="material-symbols-outlined"> file_export </span>
                   </button>
                   <div class="tooltip-text">Xuất hóa đơn</div>
-                </div>
-              </li>
-            </ul>
+              </div>
+
           </nav>
         </div>
-
       </div>
 
 
 
 
-      <div class="border border-1 border-black vh-100 table-wrapper">
-        <table class=" table table-bordered table-responsive">
-          <thead>
-            <tr class="table-warning">
-              <th scope="col" class="first-col">STT</th>
-              <th scope="col" class="big_col">Kí hiệu hóa đơn</th>
-              <th scope="col">Số hóa đơn</th>
-              <th scope="col" class="big-col">Ngày lập</th>
-              <th scope="col" class="big-col">Tính chất</th>
-              <th scope="col" class="big-col">Tên hàng hóa, dịch vụ</th>
-              <th scope="col">Đơn vị tính</th>
-              <th scope="col">Số lượng</th>
-              <th scope="col">Đơn giá</th>
-              <th scope="col">Chiết khấu</th>
-              <th scope="col">Thuế suất</th>
-              <th scope="col">Thành tiền chưa có thuế GTGT</th>
+      <div id="table-container" class=" table-container border border-1 border-black vh-100 overflow-auto table-wrapper">
+        <table id="data-table" class="table table-bordered table-responsive">
+          <thead class="table-warning">
+            <tr>
+              <th scope="col" class="text-center">STT</th>
+              <th scope="col" class="text-center">Kí hiệu mẫu số</th>
+              <th scope="col" class="text-center">Kí hiệu hóa đơn</th>
+              <th scope="col" class="text-center">Số hóa đơn</th>
+              <th scope="col" class="text-center">Ngày lập</th>
+              <th scope="col" class="text-center">Tính chất</th>
+              <th scope="col" class="text-center">Tên hàng hóa, dịch vụ</th>
+              <th scope="col" class="text-center">Đơn vị tính</th>
+              <th scope="col" class="text-center">Số lượng</th>
+              <th scope="col" class="text-center">Đơn giá</th>
+              <th scope="col" class="text-center">Chiết khấu</th>
+              <th scope="col" class="text-center">Thuế suất</th>
+              <th scope="col" class="text-center">Thành tiền chưa có thuế GTGT</th>
             </tr>
           </thead>
-          <tbody>
-
+          <tbody id="data-table-body">
+            <!-- Dữ liệu sẽ được thêm vào đây bằng JS -->
           </tbody>
         </table>
       </div>
-
     </main>
   </div>
 
@@ -231,4 +195,5 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
     <script src="./public/js/LoginCompany.js"></script>
+    <script src="./public/js/HomePage.js"></script>
 

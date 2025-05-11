@@ -76,22 +76,28 @@ body {
       transition-duration: .3s;
     }
     
-    .verifyButton {
-      width: 100%;
-      height: 30px;
-      border: none;
-      background-color:#ffc107;
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-      border-radius: 10px;
-      transition-duration: .2s;
-    }
-    
-    .verifyButton:hover {
-      background-color:#ffc107;
-      transition-duration: .2s;
-    }
+ #verifyButton {
+  width: 100%;
+  height: 30px;
+  border: none;
+  background-color: #ffc107;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 10px;
+  transition-duration: .2s;
+}
+
+#verifyButton:hover {
+  background-color: #e0a800; /* Sáng hơn một chút khi hover */
+  transition-duration: .2s;
+}
+
+#verifyButton:disabled {
+  opacity: 0.5; /* Giảm độ sáng */
+  cursor: not-allowed; /* Đổi con trỏ chuột */
+  background-color: #d6d6d6; /* Màu nền xám khi disabled */
+}
     
     .exitBtn {
       position: absolute;
