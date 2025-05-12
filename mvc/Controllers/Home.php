@@ -1,6 +1,7 @@
 <?php
 //Trang chủ
     require_once("./mvc/core/App.php");
+    require_once("./mvc/core/JWT.php");
     class Home extends Controller {
         public static function showMainPage() {
             $show = parent :: view("MainPage", 
@@ -8,6 +9,7 @@
         }
 
         public static function getTaxInfo() {
+            $username = parent::verifyRequest(); 
             $MST = $_POST['MST'];
             $tax_type = $_POST['tax_type'];
             $start_date = $_POST['start_date'];
@@ -27,10 +29,9 @@
 
 
         public static function getCompanyInfo() {
-            $username = $_POST['username'];
-            $token = $_POST['token'];
+            $username = parent::verifyRequest(); 
             $query = parent :: model("CompanyManagementModel");
-            $kq = $query -> getCompanyList($username,$token);
+            $kq = $query -> getCompanyList($username);
             echo json_encode($kq);
         }          
         

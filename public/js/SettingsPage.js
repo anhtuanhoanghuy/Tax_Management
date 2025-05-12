@@ -1,24 +1,13 @@
 var old_mst_input = "";
-var old_email ="";
-var old_tel ="";
+var token = sessionStorage.getItem('accessToken');
 $(document).ready(function(){
-    $.post("./Settings/getAccountInfo", //AJAX không tải lại
-        {username: "tuan",
-        token: "12345678"
-        },function(data){
-            data =  JSON.parse(data); //dữ liệu JSON
-            if (data.length > 0) {
-                $("#newEmail").val(data[0].email);
-                $("#newPhone").val(data[0].tel);
-                old_email = data[0].email;
-                old_tel = data[0].tel;
-            }
-    
-        }) 
-    $.post("./Settings/getCompanyList", //AJAX không tải lại
-        {username: "tuan",
-        token: "12345678"
-        },function(data){
+ $.ajax({
+        url: "./Settings/getCompanyList", // Địa chỉ API
+        type: "POST",
+        headers: {
+            "Authorization": "Bearer " + token // Thêm token vào header
+        },
+        success: function(data) {
             data =  JSON.parse(data); //dữ liệu JSON
             if (data.length == 0) {
                 $('#businessList').append(`
@@ -29,7 +18,11 @@ $(document).ready(function(){
             } else {
                 showCompanyList(data);
             }
-    }) 
+    },
+        error: function(xhr, status, error) {
+            console.log("Có lỗi xảy ra: " + error);
+        }
+    });
     $("#add_bttn").click(function(){
         $("#addBusinessModalLabel").html("Thêm Doanh Nghiệp Mới");
         $("#addCompany_bttn").html("Thêm");
@@ -48,15 +41,22 @@ $(document).ready(function(){
         } else {
             if (validateName($("#addBusinessName").val()).valid && validateMST($("#addTaxCode").val()).valid && validatePass($("#addPassword").val()).valid) {
                 if (old_mst_input == "") { //chức năng thêm doanh nghiệp
-                    $.post("./Settings/addCompany", //AJAX không tải lại
-                        {username: "tuan",
-                        token: "12345678",
-                        company_name:$("#addBusinessName").val(),
-                        MST: $("#addTaxCode").val(),
-                        password:$("#addPassword").val()
-                        },function(data){
-                            data =  JSON.parse(data); //dữ liệu JSON
-                            if (data == 1) {
+                    
+                
+                  $.ajax({
+                      url: "./Settings/addCompany", // Địa chỉ API
+                      type: "POST",
+                      headers: {
+                          "Authorization": "Bearer " + token // Thêm token vào header
+                      },
+                        data: {
+                          company_name:$("#addBusinessName").val(),
+                          MST: $("#addTaxCode").val(),
+                          password:$("#addPassword").val()
+                      },
+                      success: function(data) {
+                          data =  JSON.parse(data); //dữ liệu JSON
+                          if (data == 1) {
                                 alert("Thêm doanh nghiệp thành công.")
                                 $('#addBusinessModal').modal('hide');
                                 $('#businessList').find('tr#no_company').remove();
@@ -71,17 +71,28 @@ $(document).ready(function(){
                             } else if (data == 0) {
                                 alert("Doanh nghiệp này đã tồn tại.");
                             }
-                    
-                        }) 
+                  },
+                      error: function(xhr, status, error) {
+                          console.log("Có lỗi xảy ra: " + error);
+                      }
+                  });   
                 } else {//chức năng sửa doanh nghiệp
-                    $.post("./Settings/changeCompanyInfo", //AJAX không tải lại
-                        {username: "tuan",
-                        token: "12345678",
-                        old_MST: old_mst_input,
-                        company_name:$("#addBusinessName").val(),
-                        MST: $("#addTaxCode").val(),
-                        password:$("#addPassword").val()
-                        },function(data){
+
+
+
+                $.ajax({
+                        url: "./Settings/changeCompanyInfo", // Địa chỉ API
+                        type: "POST",
+                        headers: {
+                            "Authorization": "Bearer " + token // Thêm token vào header
+                        },
+                          data: {
+                            old_MST: old_mst_input,
+                            company_name:$("#addBusinessName").val(),
+                            MST: $("#addTaxCode").val(),
+                            password:$("#addPassword").val()
+                        },
+                        success: function(data) {
                             data =  JSON.parse(data); //dữ liệu JSON
                             if (data == 1) {
                                 alert("Cập nhật doanh nghiệp thành công.")
@@ -111,8 +122,11 @@ $(document).ready(function(){
                             } else if(data == 2) {
                                 alert("Không thay đổi");
                             }
-                    
-                        }) 
+                    },
+                        error: function(xhr, status, error) {
+                            console.log("Có lỗi xảy ra: " + error);
+                        }
+                    });
                 }
                 
             } else if (!validateName($("#addBusinessName").val()).valid || !validateMST($("#addTaxCode").val()).valid || !validatePass($("#addPassword").val()).valid) {
@@ -128,23 +142,30 @@ $(document).ready(function(){
 
     $("#save").click(function(){
         if (validateAccountInfo()) {
-            $.post("./Settings/changeAccountInfo", //AJAX không tải lại
-                {username: "tuan",
-                token: "12345678",
-                password: $('#newPassword').val(),
-                email:$('#newEmail').val(),
-                tel: $('#newPhone').val(),
-                },function(data){
-                    data =  JSON.parse(data); //dữ liệu JSON
-                    if (data == 1) { //thành công
-                        alert("Cập nhật thông tin tài khoản thành công.")
-                    } else if (data == 0) {
-                        alert("Cập nhật thông tin tài khoản thành công.")
-                    } else if (data == -1) {
-                        alert("Email hoặc số điện thoại đã được sử dụng bởi tài khoản khác.")
-                    }
-                }
-            )
+
+
+ $.ajax({
+        url: "./Settings/changeAccountInfo", // Địa chỉ API
+        type: "POST",
+        headers: {
+            "Authorization": "Bearer " + token // Thêm token vào header
+        },
+          data: {
+            password: $('#newPassword').val()
+        },
+        success: function(data) {
+            data =  JSON.parse(data); //dữ liệu JSON
+            if (data == 1) { //thành công
+                alert("Cập nhật thông tin tài khoản thành công.")
+            } else if (data == 0) {
+                alert("Cập nhật thông tin tài khoản không thành công.")
+            } 
+    },
+        error: function(xhr, status, error) {
+            console.log("Có lỗi xảy ra: " + error);
+        }
+    });
+
         }
     })
 })
@@ -183,33 +204,6 @@ function validateName(name) {
     }
     return { valid: true, error: "" };
   }
-function validateEmail(mail) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-    if (!mail) {
-        return { valid: false, error: "Vui lòng nhập email." };
-    }
-
-    if (!emailRegex.test(mail)) {
-        return { valid: false, error: "Email không đúng định dạng." };
-    }
-
-    return { valid: true, error: "" };
-}
-
-    //Xử lý sdt
-
-    function validatePhoneNumber(mobile) {
-        // Regex: đầu 03, 05, 07, 08, 09 + 8 số
-        var vnf_regex = /^(0[3|5|7|8|9])[0-9]{8}$/;
-        if (!mobile) {
-            return {valid: false, error: "Vui lòng nhập số điện thoại." };;
-        }
-        if (!vnf_regex.test(mobile)) {
-            return {valid: false, error: "Số điện thoại không hợp lệ." };;
-        }
-        return {valid: true, error: "" };;
-    }
 
   function showCompanyList(data) {
     let mstToDelete = null;
@@ -275,12 +269,20 @@ function validateEmail(mail) {
     // Sự kiện xác nhận xoá từ modal
     $('#delete_confirm').off('click').on('click', function () {
       if (mstToDelete && trToDelete) {
-        $.post('./Settings/deleteCompany', {
-          MST: mstToDelete,
-          token: '12345678'
-        }, function (data) {
-          data = JSON.parse(data);
-          if (data == 1) {
+
+
+        $.ajax({
+          url: "./Settings/deleteCompany", // Địa chỉ API
+          type: "POST",
+          headers: {
+              "Authorization": "Bearer " + token // Thêm token vào header
+          },
+            data: {
+              MST: mstToDelete,
+          },
+          success: function(data) {
+              data =  JSON.parse(data); //dữ liệu JSON
+                 if (data == 1) {
             trToDelete.remove();
             $('#errorModal').modal('hide');
             if ($('#businessList').children('tr').length === 0) {
@@ -290,10 +292,14 @@ function validateEmail(mail) {
                   </tr>
                 `);
               }
-          } else {
-            alert('Lỗi khi xoá.');
+            } else {
+              alert('Lỗi khi xoá.');
+            }
+        },
+          error: function(xhr, status, error) {
+              console.log("Có lỗi xảy ra: " + error);
           }
-        });
+        });   
       }
     });
   }
@@ -301,18 +307,10 @@ function validateEmail(mail) {
   function validateAccountInfo() {
     const newPassword = $('#newPassword').val();
     const renewPassword = $('#renewPassword').val();
-    const newEmail = $('#newEmail').val();
-    const newTel = $('#newPhone').val();
-    if (!newPassword && !renewPassword && newEmail === old_email && newTel === old_tel) {
+    if (!newPassword && !renewPassword) {
         alert("Không có yêu cầu thay đổi.");
         return;
-      } else if (newEmail == ""  && newTel == "") {
-        alert("Vui lòng nhập đầy đủ thông tin.");
-        return;
-      }
-    
-      // Nếu nhập 1 trong 2 password thì bắt buộc phải nhập cả 2
-      if (newPassword || renewPassword) {
+      } else if (newPassword || renewPassword) {
         if (!newPassword || !renewPassword) {
           alert("Vui lòng nhập đầy đủ mật khẩu mới và xác nhận mật khẩu");
           return;
@@ -332,22 +330,6 @@ function validateEmail(mail) {
           return;
         }
       }
-    
-      // Nếu email thay đổi thì validate định dạng email
-      if (newEmail !== old_email) {
-        if(!validateEmail(newEmail).valid) {
-            alert(validateEmail(newEmail).error);
-            return;
-        }
-      }
-    
-      // Nếu số điện thoại thay đổi thì validate
-      if (newTel !== old_tel) {
-        if(!validatePhoneNumber(newTel).valid) {
-            alert(validatePhoneNumber(newTel).error);
-            return;
-        }   
-      } 
       // Nếu qua được hết các bước, có thể gửi form hoặc gọi AJAX
       return true;
   }

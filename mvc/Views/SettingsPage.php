@@ -14,14 +14,6 @@
                             <input type="password" class="form-control" id="renewPassword"
                                 placeholder="Nhập lại mật khẩu mới">
                         </div>
-                        <div class="mb-3">
-                            <label for="newEmail" class="form-label">Email</label>
-                            <input class="form-control" id="newEmail" placeholder="Nhập email mới">
-                        </div>
-                        <div class="mb-3">
-                            <label for="newPhone" class="form-label">Số Điện Thoại</label>
-                            <input type="tel" class="form-control" id="newPhone" placeholder="Nhập số điện thoại mới">
-                        </div>
                         <button id = "save" type="button" class="btn btn-primary mb-4">Lưu Thay Đổi</button>
                     </div>
                     <div class="col-8"></div>

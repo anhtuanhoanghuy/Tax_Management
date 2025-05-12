@@ -1,36 +1,36 @@
 <?php
 //Đăng nhập tài khoản và lưu vào SESSION
-session_start();
-include ("../core/App.php");
-class Login{
-    //Hàm đăng nhập tài khoản sử dụng SESSION
-    function __construct() {
+ require_once("./mvc/core/JWT.php");
+class Login extends Controller {
+    public static function checkLoginAccount() {       
         if (isset($_SESSION["account"])) {
-            header("location:/Tax_Management/Home");
+            header("Location: /Tax_Management/Home");
+            exit;
         } else {
-            if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
-        
-                    $username = $_POST['username'];
-                    $password = $_POST['password'];
-                    $email = $_POST['email'];
-                    require_once("../Models/LoginModel.php");
-                    $kq = new LoginModel();
-                    if (strpos($email, '@') !== false) {
-                        $result = $kq -> checkAccountWithEmail($username, $password,$email);
-                    } else {
-                        $result = $kq -> checkAccountWithTel($username, $password,$email);
-                    }
-                    if($result != 0 ) {
-                        $_SESSION["account"] = $result;
-                        header("location:/Tax_Management/Home");
-                    } else if($result == 0) {
-                        header("Refresh:0;  url=/Tax_Management");
-                    }
-            }          
+            if (isset($_POST['username']) && isset($_POST['password'])) {
+                $username = $_POST['username'];
+                $password = md5($_POST['password']);
+                $query = parent::model("LoginModel");
+                $result = $query->checkLoginAccount($username, $password);
+
+                if ($result == 1) {
+                    $_SESSION["account"] = $username;
+
+                    // ✅ Tạo token JWT
+                    $token = JWT::encode($username,self::$secret_signature);
+                    // ✅ Trả về token qua JSON
+                    echo json_encode([
+                        'status' => 1,
+                        'token' => $token
+                    ]);
+                } else {
+                    echo json_encode([
+                        'status' => 0,
+                        'message' => 'Sai tài khoản hoặc mật khẩu'
+                    ]);
+                }
+            }
         }
-         
+    }
 }
-}
-$login = new Login();
-// C9MH7RUN1Z8EQ93GUHRRSZT1
 ?>

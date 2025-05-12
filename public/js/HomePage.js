@@ -3,82 +3,97 @@ var limit = 10;
 var maxPageButton = 7;
 var listElement = document.getElementById("data-table-body");
 var list = listElement.children;
+const token = sessionStorage.getItem("accessToken");
 $(document).ready(function(){
-    $.post("./Home/getCompanyInfo", //AJAX không tải lại
-        {username: "tuan",
-        token: "12345678"
-        },function(data){
-            data =  JSON.parse(data); //dữ liệu JSON
+    // Sử dụng $.ajax để gửi yêu cầu với header Authorization
+    $.ajax({
+        url: "./Home/getCompanyInfo", // Địa chỉ API
+        type: "POST",
+        headers: {
+            "Authorization": "Bearer " + token // Thêm token vào header
+        },
+        success: function(data) {
+            data = JSON.parse(data); // Dữ liệu trả về là JSON
             if (data.length == 0) {
-            $(".menu").append(`<li>
-                <span>Không có công ty</span>
-            </li>`)
-    
+                $(".menu").append(`<li><span>Không có công ty</span></li>`);
             } else {
-            for (var x = 0; x < data.length;x++){
-                $(".menu").append(`<li class="Company" data-value="${data[x].MST}">
+                for (var x = 0; x < data.length; x++) {
+                    $(".menu").append(`<li class="Company" data-value="${data[x].MST}">
                         ${data[x].company_name}
-                    </li>`)
+                    </li>`);
+                }
             }
-    
-            }
-    
-        }) 
+        },
+        error: function(xhr, status, error) {
+            console.log("Có lỗi xảy ra: " + error);
+        }
+    });
+
+    // Các sự kiện khác cho phần menu và select
     $('.select').click(function(){
-          $('.select').toggleClass('select-clicked');
-          $('.caret').toggleClass('caret-rotate');
-          $('.menu').toggleClass('menu-open');
-       });
-    
-           $('.menu').on("click",".Company",function() {
-             $('.selected').text($(this).text());
-             $('.select').removeClass('select-clicked');
-             $('.caret').removeClass('caret-rotate');
-             $('.menu').removeClass('menu-open');
-             $('.menu li').each(function(){
-               $(this).removeClass('active');
-             });
-           });
-    
-    
-    
+        $('.select').toggleClass('select-clicked');
+        $('.caret').toggleClass('caret-rotate');
+        $('.menu').toggleClass('menu-open');
+    });
+
+    $('.menu').on("click", ".Company", function() {
+        $('.selected').text($(this).text());
+        $('.selected').attr('data-value', $(this).attr("data-value"));
+        $('.select').removeClass('select-clicked');
+        $('.caret').removeClass('caret-rotate');
+        $('.menu').removeClass('menu-open');
+        $('.menu li').each(function(){
+            $(this).removeClass('active');
+        });
+    });
+
+    // Khi click vào nút Search
     $("#sold_bttn").click(function(){
         $('#statusSelect').prop('disabled', true);
-    })
+    });
     $("#purchase_bttn").click(function(){
         $('#statusSelect').prop('disabled', false);
-    })
-      // Khi click vào nút Search, kiểm tra lại
-    $('#search_bttn').click(function() { //Lấy thông tin thuếthuế
+    });
+
+    $('#search_bttn').click(function() {
         if ($('#startDate').val() != "" && $('#endDate').val() != "" && $('#startDate').val() > $('#endDate').val()) {
-            alert("Không được chọn ngày bắt đầu lớn hơn ngày kết thúc.")
+            alert("Không được chọn ngày bắt đầu lớn hơn ngày kết thúc.");
         } else {
             console.time("queryTime");   // Bắt đầu đo thời gian với nhãn "label"
-            // đoạn mã cần đo thời gian
-            $.post("./Home/getTaxInfo", //AJAX không tải lại
-                {MST: "1122334455",
-                tax_type:$('#v-pills-tab .nav-link.active').val(),
-                start_date:$('#startDate').val(),
-                end_date:$('#endDate').val(),
-                result:$("#statusSelect").val()
-                },function(data){
+            // Gọi API lấy thông tin thuế
+            $.ajax({
+                url: "./Home/getTaxInfo", // Địa chỉ API
+                type: "POST",
+                headers: {
+                    "Authorization": "Bearer " + token // Thêm token vào header
+                },
+                data: {
+                    MST: $('.selected').attr('data-value'),
+                    tax_type: $('#v-pills-tab .nav-link.active').val(),
+                    start_date: $('#startDate').val(),
+                    end_date: $('#endDate').val(),
+                    result: $("#statusSelect").val()
+                },
+                success: function(data) {
                     data = JSON.parse(data);
                     $("#result_count").html(`Có ${data.length} kết quả`);
                     loadData(data);
                     console.timeEnd("queryTime"); // Kết thúc và in thời gian thực thi với cùng nhãn
-        })
+                },
+                error: function(xhr, status, error) {
+                    console.log("Có lỗi xảy ra: " + error);
+                }
+            });
         }
-    
-        }
-    );
+    });
 
     $("#itemSelect").on("change", function () {
-        limit = $(this).val(); // cập nhật số item/trang
-        thisPage = 1;           // quay về trang đầu tiên
-        loadItems();            // load lại dữ liệu
+        limit = $(this).val(); // Cập nhật số item/trang
+        thisPage = 1;           // Quay về trang đầu tiên
+        loadItems();            // Load lại dữ liệu
     });
-    
-})
+});
+
 
 function loadData(data) { //load dữ liệu lên giao diện
         for (var j = list.length-1; j >= 0; j--) {

@@ -1,7 +1,7 @@
 <?php
     class CompanyManagementModel extends Database{
         //lấy danh sách tất cả công ty
-        public function getCompanyList($username,$token){
+        public function getCompanyList($username){
             $sql = "SELECT company.company_name, company.MST, company.pass_word FROM company
                     JOIN account ON company.account_id = account.account_id
                     WHERE account.user_name = ?";
@@ -11,7 +11,7 @@
             return ($row);
         } 
 
-        public function addCompany($username,$token,$company_name,$MST,$password){
+        public function addCompany($username,$company_name,$MST,$password){
             $sql = "SELECT company.company_name, company.MST, company.pass_word FROM company
                     JOIN account ON company.account_id = account.account_id
                     WHERE account.user_name = ? AND company.MST = ?";
@@ -35,7 +35,7 @@
             
         } 
 //nếu mst không tha đổi thì sửa thông tin, mst thay đổi thì check mst mới có trùng khôngkhông
-        public function changeCompanyInfo($username,$token,$old_MST,$company_name,$MST,$password) {
+        public function changeCompanyInfo($username,$old_MST,$company_name,$MST,$password) {
             if ($MST == $old_MST) { //khong thay doi MST
                 $sql = "UPDATE company
                 SET company_name = ?, MST = ?, pass_word = ?
@@ -70,7 +70,7 @@
             }
         }
 
-        public function deleteCompany($MST,$token){
+        public function deleteCompany($MST){
             $sql = "DELETE FROM company WHERE MST = ?";
             $result = $this ->conn->prepare($sql);
             $result->execute([$MST]);
