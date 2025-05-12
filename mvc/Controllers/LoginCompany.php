@@ -1,17 +1,19 @@
 <?php
-require_once("../core/Controller.php");
+
 class LoginCompany extends Controller{
     function Login(){
+        //test
+        echo "ok";
         //get post data
-if (isset($_POST['data_company'])) {
-    $data = $_POST['data_company'];
-    
+if (isset($_POST['mst'])&& isset($_POST['token']) ) {
+    $mst=$_POST["mst"];
+    $token=$_POST["token"];
+    //
     session_start();
-    $_SESSION[''] = 'john.doe';
+    $_SESSION['Token'."_".$mst] =$mst.$token;
+    setcookie('Token'."_".$mst,$mst.$token,0,"/","",TRUE,FALSE);
+    header("HTTP/1.1 200 OK");} 
 
-    // echo 
-} 
-        //check
     }
 }
 ?>
