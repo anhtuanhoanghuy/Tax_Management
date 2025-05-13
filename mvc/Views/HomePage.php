@@ -138,7 +138,7 @@
     </div>
   </div>
   <!-- Modal -->
-  <div class="modal fade" id="loginMSTModal" tabindex="-1" aria-labelledby="loginMSTModalLabel" aria-hidden="true">
+  <div class="modal fade" id="loginMSTModal" tabindex="-1" aria-labelledby="loginMSTModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header border-bottom border-warning border-3">
@@ -155,7 +155,7 @@
                 <input type="input" class="form-control" id="captchaValue" name="passwordMST">
                 <div class="btn btn-outline-secondary" type="button" id="captcha"></div>
               </div>
-              <div class="text-danger" id="warning">Mật khẩu Doanh nghiệp đã bị thay đổi, vui lòng cấu hình lại.</div>
+              <div class="text-danger" id="warning"></div>
             </div>
             <button type="button" class="btn btn-warning  d-flex justify-content-center " id="loginCompany">Đăng
               nhập</button>
@@ -194,6 +194,5 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
-    <script src="./public/js/LoginCompany.js"></script>
     <script src="./public/js/HomePage.js"></script>
 

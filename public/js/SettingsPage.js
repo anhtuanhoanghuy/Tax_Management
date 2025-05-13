@@ -1,5 +1,5 @@
 var old_mst_input = "";
-var token = sessionStorage.getItem('accessToken');
+var token = localStorage.getItem('accessToken');
 $(document).ready(function(){
  $.ajax({
         url: "./Settings/getCompanyList", // Địa chỉ API

@@ -1,6 +1,6 @@
 <?php
 //Đăng nhập tài khoản và lưu vào SESSION
- require_once("./mvc/core/JWT.php");
+require_once("./mvc/core/JWT.php");
 class Login extends Controller {
     public static function checkLoginAccount() {       
         if (isset($_SESSION["account"])) {

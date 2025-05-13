@@ -36,7 +36,7 @@
             $username = parent::verifyRequest(); 
             $company_name = $_POST['company_name'];
             $MST = $_POST['MST'];
-            $password = md5($_POST['password']);
+            $password = $_POST['password'];
             $query = parent :: model("CompanyManagementModel");
             $kq = $query -> addCompany($username,$company_name,$MST,$password);
             echo json_encode($kq);
@@ -48,7 +48,7 @@
             $old_MST = $_POST['old_MST'];
             $company_name = $_POST['company_name'];
             $MST = $_POST['MST'];
-            $password = md5($_POST['password']);
+            $password = $_POST['password'];
             $query = parent :: model("CompanyManagementModel");
             $kq = $query -> changeCompanyInfo($username,$old_MST,$company_name,$MST,$password);
             echo json_encode($kq);

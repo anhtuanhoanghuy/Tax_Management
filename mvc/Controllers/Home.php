@@ -33,8 +33,53 @@
             $query = parent :: model("CompanyManagementModel");
             $kq = $query -> getCompanyList($username);
             echo json_encode($kq);
-        }          
+        }   
         
-       
+        public static function getCaptcha() {
+            $username = parent::verifyRequest();    
+            // Khởi tạo cURL
+            $ch = curl_init();
+
+            // Thiết lập URL và các tùy chọn
+            curl_setopt($ch, CURLOPT_URL, "https://hoadondientu.gdt.gov.vn:30000/captcha");
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);     
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);    
+            // Thực thi và lấy kết quả
+            $response = curl_exec($ch);
+            $response = json_decode($response);
+            echo json_encode($response);
+            curl_close($ch);
+        }          
+      
+        public static function authenticateCaptcha() {
+            $username = parent::verifyRequest();    
+            $data = [
+                "ckey" => $_POST['ckey'],
+                "cvalue" => $_POST['cvalue'],
+                "password" => $_POST['password'],
+                "username" => $_POST['MST']
+            ];
+            // Mã hóa thành JSON
+            $jsonData = json_encode($data);
+            // Khởi tạo cURL
+            $ch = curl_init();
+
+            // Thiết lập URL và các tùy chọn
+            curl_setopt($ch, CURLOPT_URL, "https://hoadondientu.gdt.gov.vn:30000/security-taxpayer/authenticate");
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);     
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);   
+            curl_setopt($ch, CURLOPT_POST, true); // Bắt buộc POST 
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData); // Gửi dữ liệu JSON
+            // Header bắt buộc: Content-Type JSON
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($jsonData)
+            ]);
+            // Thực thi và lấy kết quả
+            $response = curl_exec($ch);
+            $response = json_decode($response);
+            echo json_encode($response);
+            curl_close($ch);
+        }          
     }
 ?>

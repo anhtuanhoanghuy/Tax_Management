@@ -29,14 +29,13 @@ $(document).ready(function () {
             event.preventDefault();
             $(".logContainer__space").html("Vui lòng nhập đúng định dạng.");
         } else {
-            // $("#login").trigger("submit");
             $.post("./Login/checkLoginAccount",
               {username: $("#username").val(), 
               password: $("#password").val()},
               function(data){  //AJAX không tải lại
               data =  JSON.parse(data);     //dữ liệu JSON
               if (data.status === 1) {
-                sessionStorage.setItem('accessToken', data.token);
+                localStorage.setItem('accessToken', data.token);
                 window.location.href = '/Tax_Management/Home';
               } else {
                  $(".logContainer__space").html("Tên đăng nhập hoặc mật khẩu không đúng.");

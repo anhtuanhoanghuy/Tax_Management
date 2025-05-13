@@ -3,7 +3,7 @@ var limit = 10;
 var maxPageButton = 7;
 var listElement = document.getElementById("data-table-body");
 var list = listElement.children;
-const token = sessionStorage.getItem("accessToken");
+const token = localStorage.getItem("accessToken");
 $(document).ready(function(){
     // Sử dụng $.ajax để gửi yêu cầu với header Authorization
     $.ajax({
@@ -18,7 +18,7 @@ $(document).ready(function(){
                 $(".menu").append(`<li><span>Không có công ty</span></li>`);
             } else {
                 for (var x = 0; x < data.length; x++) {
-                    $(".menu").append(`<li class="Company" data-value="${data[x].MST}">
+                    $(".menu").append(`<li class="Company" MST-value="${data[x].MST}" pass-value="${data[x].pass_word}">
                         ${data[x].company_name}
                     </li>`);
                 }
@@ -36,16 +36,34 @@ $(document).ready(function(){
         $('.menu').toggleClass('menu-open');
     });
 
-    $('.menu').on("click", ".Company", function() {
-        $('.selected').text($(this).text());
-        $('.selected').attr('data-value', $(this).attr("data-value"));
-        $('.select').removeClass('select-clicked');
-        $('.caret').removeClass('caret-rotate');
-        $('.menu').removeClass('menu-open');
-        $('.menu li').each(function(){
-            $(this).removeClass('active');
-        });
+$('.menu').on("click", ".Company", function() {
+    var selectedCompany = $(this);
+    var mstValue = selectedCompany.attr("MST-value");
+    var passValue = selectedCompany.attr("pass-value");
+
+    $('.selected').text(selectedCompany.text());
+    $('.selected').attr('MST-value', mstValue);
+    $('.select').removeClass('select-clicked');
+    $('.caret').removeClass('caret-rotate');
+    $('.menu').removeClass('menu-open');
+
+    $('.menu li').each(function() {
+        selectedCompany.removeClass('active');
     });
+
+    if (localStorage.getItem(mstValue)) {
+        alert(`Đã có token ${mstValue}`);
+    } else {
+        OpenModal(mstValue, passValue); // Gọi mở modal trước
+        $("#warning").html("");
+        $("#captchaValue").val("");
+        getCaptcha().then(function(captchaKey) {
+            $("#loginCompany").data("captchaKey", captchaKey); // Lưu captchaKey tạm để dùng sau
+        }).catch(function(error) {
+            console.error("Lỗi khi lấy captcha:", error);
+        });
+    }
+});
 
     // Khi click vào nút Search
     $("#sold_bttn").click(function(){
@@ -68,7 +86,7 @@ $(document).ready(function(){
                     "Authorization": "Bearer " + token // Thêm token vào header
                 },
                 data: {
-                    MST: $('.selected').attr('data-value'),
+                    MST: $('.selected').attr('MST-value'),
                     tax_type: $('#v-pills-tab .nav-link.active').val(),
                     start_date: $('#startDate').val(),
                     end_date: $('#endDate').val(),
@@ -342,4 +360,72 @@ function listPage() {//tạo phần nút bấm để chuyển trang
 function changePage(i) {//chuyển trang
     thisPage = i;
     loadItems();
+}
+
+function getCaptcha() {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: "./Home/getCaptcha",
+            type: "POST",
+            headers: {
+                "Authorization": "Bearer " + token
+            },
+            success: function (data) {
+                data = JSON.parse(data);
+                $("#captcha").empty();
+                $("#captcha").append(data.content); // Hiển thị ảnh captcha mới
+                resolve(data.key); // Trả về captchaKey mới
+            },
+            error: function (xhr, status, error) {
+                reject(error);
+            }
+        });
+    });
+}
+
+function OpenModal(MST, passValue) {
+    var myModal = document.getElementById("loginMSTModal");
+    var modalInstance = new bootstrap.Modal(myModal);
+    modalInstance.show();
+
+    // Khi nhấn nút Đăng nhập
+    $("#loginCompany").off("click").on("click", function () {
+        const captchaKey = $("#loginCompany").data("captchaKey"); // Lấy captchaKey hiện tại
+        $.ajax({
+            url: "./Home/authenticateCaptcha",
+            type: "POST",
+            headers: {
+                "Authorization": "Bearer " + token
+            },
+            data: {
+                ckey: captchaKey,
+                cvalue: $("#captchaValue").val(),
+                password: passValue,
+                MST: MST
+            },
+            success: function(data) {
+                data = JSON.parse(data);
+                if (data.token) {
+                    modalInstance.hide();
+                    console.log("Token:", data.token);
+                    localStorage.setItem(MST, data.token); // Lưu token vào sessionStorage
+                    // Có thể đóng modal ở đây nếu muốn
+                } else {
+                    // Thông báo lỗi và tải captcha mới
+                    $("#warning").html(data.message);
+
+                    // Load captcha mới và cập nhật captchaKey
+                    getCaptcha().then(function(newKey) {
+                        $("#loginCompany").data("captchaKey", newKey); // Ghi đè captchaKey
+                        $("#captchaValue").val("");
+                    }).catch(function (error) {
+                        console.error("Không thể load captcha mới:", error);
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log("Có lỗi xảy ra khi xác thực: " + error);
+            }
+        });
+    });
 }
