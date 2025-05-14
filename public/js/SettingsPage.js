@@ -1,5 +1,5 @@
 var old_mst_input = "";
-var token = localStorage.getItem('accessToken');
+const token = getCookie("accessToken");
 $(document).ready(function(){
  $.ajax({
         url: "./Settings/getCompanyList", // Địa chỉ API
@@ -333,3 +333,10 @@ function validateName(name) {
       // Nếu qua được hết các bước, có thể gửi form hoặc gọi AJAX
       return true;
   }
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+}

@@ -77,7 +77,14 @@
             ]);
             // Thực thi và lấy kết quả
             $response = curl_exec($ch);
-            $response = json_decode($response);
+        // Giải mã JSON (giả sử API trả về JSON)
+           $response = json_decode($response, true); // true để nhận mảng kết quả
+
+            if (isset($response['token'])) {
+                // ✅ Gửi token vào cookie session (hết khi đóng trình duyệt)
+                $company_token_name = "token_" . $_POST['MST'];
+                setcookie($company_token_name, $response['token'], 0, "/", "", false, false); 
+            }            
             echo json_encode($response);
             curl_close($ch);
         }          

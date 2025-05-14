@@ -3,7 +3,8 @@ var limit = 10;
 var maxPageButton = 7;
 var listElement = document.getElementById("data-table-body");
 var list = listElement.children;
-const token = localStorage.getItem("accessToken");
+const token = getCookie("accessToken");
+console.log("JWT:", token);
 $(document).ready(function(){
     // Sử dụng $.ajax để gửi yêu cầu với header Authorization
     $.ajax({
@@ -50,8 +51,8 @@ $('.menu').on("click", ".Company", function() {
     $('.menu li').each(function() {
         selectedCompany.removeClass('active');
     });
-
-    if (localStorage.getItem(mstValue)) {
+    var MST_token = "token_" + mstValue;
+    if (getCookie(MST_token)) {
         alert(`Đã có token ${mstValue}`);
     } else {
         OpenModal(mstValue, passValue); // Gọi mở modal trước
@@ -407,8 +408,7 @@ function OpenModal(MST, passValue) {
                 data = JSON.parse(data);
                 if (data.token) {
                     modalInstance.hide();
-                    console.log("Token:", data.token);
-                    localStorage.setItem(MST, data.token); // Lưu token vào sessionStorage
+                    console.log("Token:", data.token); 
                     // Có thể đóng modal ở đây nếu muốn
                 } else {
                     // Thông báo lỗi và tải captcha mới
@@ -428,4 +428,12 @@ function OpenModal(MST, passValue) {
             }
         });
     });
+}
+
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
 }

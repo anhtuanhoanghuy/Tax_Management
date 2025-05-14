@@ -42,7 +42,7 @@
                   aria-expanded="false"></i>
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
                   <li><a class="dropdown-item" href="/Tax_Management/Settings">Cài đặt</a></li>
-                  <li><a id = "logout_bttn" class="dropdown-item">Đăng xuất</a></li>
+                  <li><a id = "logout_bttn" href="/Tax_Management/Logout" class="dropdown-item">Đăng xuất</a></li>
 
                 </ul>
               </div>
@@ -62,7 +62,6 @@
         }
             
     ?>
- <script src="./public/js/Logout.js"></script>
     </body>
 
 </html>

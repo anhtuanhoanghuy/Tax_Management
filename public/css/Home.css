@@ -375,7 +375,3 @@ opacity: 1;
   background-color: transparent;
   color: gray;
 }
-
-#logout_bttn:hover{
-  cursor: pointer;
-}

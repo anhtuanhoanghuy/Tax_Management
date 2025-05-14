@@ -35,7 +35,6 @@ $(document).ready(function () {
               function(data){  //AJAX không tải lại
               data =  JSON.parse(data);     //dữ liệu JSON
               if (data.status === 1) {
-                localStorage.setItem('accessToken', data.token);
                 window.location.href = '/Tax_Management/Home';
               } else {
                  $(".logContainer__space").html("Tên đăng nhập hoặc mật khẩu không đúng.");
